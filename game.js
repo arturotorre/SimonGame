@@ -3,9 +3,10 @@ var gamePattern = [];
 var userClickedPattern = [];
 var buttonColours = ["red", "blue", "green", "yellow"];
 var level = 0;
+var started = false;
 
 $(document).keydown(function(event){
-    if (event.key=== "a"){
+    if (event.key=== "a"|| started === true){
         if (level === 0) {
             nextSequence();
         }
@@ -20,6 +21,17 @@ $(".btn").click(function(event) {
     checkAnswer(userClickedPattern.length-1);
 });
 
+$("#restart").click(function(){
+    $("button").text("Restart");
+    started = true;
+    startAgain();
+});
+
+function startAgain(){
+    startOver();
+    $("#level-title").text("Press A Key to Start");
+    nextSequence();
+};
 
 function checkAnswer(currentLevel){
 
@@ -33,7 +45,7 @@ function checkAnswer(currentLevel){
         var wrong = new Audio('sounds/wrong.mp3');
         wrong.play();
         $("body").addClass("game-over");
-        $("#level-title").text("Game Over, Press 'A' to Restart");
+        $("#level-title").text("Game Over, Press Any Key to Restart");
         setTimeout(function () {
             $("body").removeClass("game-over");
           }, 200);
