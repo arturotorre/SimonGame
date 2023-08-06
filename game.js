@@ -21,7 +21,7 @@ $(".btn").click(function(event) {
     checkAnswer(userClickedPattern.length-1);
 });
 
-$("#restart").click(function(){
+$("button").click(function(){
     $("button").text("Restart");
     started = true;
     startAgain();
